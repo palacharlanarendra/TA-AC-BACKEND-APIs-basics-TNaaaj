@@ -22,8 +22,9 @@ router.get('/:id', (req, res, next) => {
 //create a book
 router.post('/', (req, res, next) => {
   console.log(req.body);
-  req.body.tags = req.body.tags.trim().split(' ');
+  req.body.tags = req.body.tags.trim().split(',');
   Book.create(req.body, (err, book) => {
+    console.log(err, book);
     if (err) return next(err);
     res.status(200).json({ book });
   });
@@ -32,7 +33,7 @@ router.post('/', (req, res, next) => {
 //edit a book
 router.put('/:id', (req, res, next) => {
   let id = req.params.id;
-  req.body.tags = req.body.tags.trim().split(' ');
+  req.body.tags = req.body.tags.trim().split(',');
   Book.findByIdAndUpdate(id, req.body, (err, book) => {
     if (err) return next(err);
     console.log(book);
