@@ -68,6 +68,7 @@ router.post('/newcomments/:id/comments', (req, res, next) => {
     );
   });
 });
+//edit comments
 router.put('/newcomments/:id', (req, res, next) => {
   let id = req.params.id;
   Comment.findByIdAndUpdate(id, req.body, (err, comment) => {
